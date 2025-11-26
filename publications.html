@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rogini Runghen | Publications</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700&family=JetBrains+Mono:wght@400;500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0f4c75;
+            --secondary: #3282b8;
+            --accent: #00d4ff;
+            --dark-bg: #0a0e27;
+            --light-text: #f5f7fa;
+            --muted-text: #a8b5c1;
+            --border: #1a2438;
+            --success: #06b6a0;
+            --subtle: #14213d;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #0d1b2a 100%);
+            color: var(--light-text);
+            font-family: 'Lato', sans-serif;
+            line-height: 1.6;
+            letter-spacing: 0.3px;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated background grid */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(50, 130, 184, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(50, 130, 184, 0.05) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Floating accent elements */
+        .accent-blob {
+            position: fixed;
+            border-radius: 50%;
+            opacity: 0.08;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .blob-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--accent);
+            top: -100px;
+            right: -100px;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .blob-2 {
+            width: 300px;
+            height: 300px;
+            background: var(--secondary);
+            bottom: 10%;
+            left: -50px;
+            animation: float 25s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, 30px); }
+        }
+
+        header {
+            position: relative;
+            z-index: 10;
+            padding: 3rem 2rem;
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+            background: rgba(10, 14, 39, 0.7);
+        }
+
+        .header-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Fraunces', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+            text-decoration: none;
+        }
+
+        nav {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            color: var(--muted-text);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.3s ease, border-bottom 0.3s ease;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 0.2rem;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+            border-bottom: 2px solid var(--accent);
+        }
+
+        nav a.active {
+            color: var(--accent);
+            border-bottom: 2px solid var(--accent);
+        }
+
+        main {
+            position: relative;
+            z-index: 5;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 4rem;
+            animation: fadeInDown 0.8s ease 0.1s both;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .page-header h1 {
+            font-family: 'Fraunces', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            color: var(--light-text);
+        }
+
+        .page-header p {
+            color: var(--muted-text);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            max-width: 700px;
+        }
+
+        /* Filters - Hidden */
+        .filter-section {
+            display: none;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-label {
+            color: var(--muted-text);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        .filter-btn {
+            padding: 0.6rem 1.2rem;
+            border: 1px solid var(--border);
+            background: rgba(26, 36, 56, 0.5);
+            color: var(--muted-text);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover {
+            background: rgba(50, 130, 184, 0.1);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .filter-btn.active {
+            background: rgba(0, 212, 255, 0.15);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Publications List */
+        .publications-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .pub-item {
+            background: rgba(26, 36, 56, 0.5);
+            border-left: 4px solid var(--accent);
+            border-radius: 4px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .pub-item:hover {
+            background: rgba(50, 130, 184, 0.08);
+            transform: translateX(5px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.08);
+        }
+
+        .pub-year {
+            color: var(--success);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .pub-item h3 {
+            font-size: 1.25rem;
+            color: var(--light-text);
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+            font-weight: 600;
+        }
+
+        .pub-authors {
+            color: var(--muted-text);
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            font-style: italic;
+        }
+
+        .pub-journal {
+            color: var(--secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .pub-status {
+            color: var(--muted-text);
+            font-size: 0.85rem;
+            margin-bottom: 0.8rem;
+            padding: 0.5rem 0.8rem;
+            background: rgba(0, 212, 255, 0.08);
+            border-left: 2px solid var(--accent);
+            border-radius: 2px;
+            display: inline-block;
+        }
+
+        .pub-description {
+            color: var(--muted-text);
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        .pub-links {
+            display: flex;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        .pub-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: color 0.2s ease;
+            border-bottom: 1px dotted var(--accent);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .pub-link:hover {
+            color: #00ffff;
+        }
+
+        .pub-type {
+            display: inline-block;
+            padding: 0.3rem 0.7rem;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 3px;
+            font-size: 0.75rem;
+            color: var(--accent);
+            font-family: 'JetBrains Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            position: relative;
+            z-index: 10;
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem;
+            margin-top: 6rem;
+            backdrop-filter: blur(10px);
+            background: rgba(10, 14, 39, 0.7);
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            color: var(--muted-text);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: var(--accent);
+        }
+
+        .footer-text {
+            color: var(--muted-text);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+
+            nav {
+                gap: 1.5rem;
+            }
+
+            nav a {
+                font-size: 0.8rem;
+            }
+
+            .header-content {
+                flex-wrap: wrap;
+                gap: 2rem;
+            }
+
+            .filter-section {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="accent-blob blob-1"></div>
+    <div class="accent-blob blob-2"></div>
+
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo">RR</a>
+            <nav>
+                <a href="index.html">About</a>
+                <a href="index.html#approach">Approach</a>
+                <a href="index.html#projects">Projects</a>
+                <a href="publications.html" class="active">Publications</a>
+                <a href="index.html#experience">Experience</a>
+                <a href="index.html#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <h1>Publications & Presentations</h1>
+            <p>
+                A comprehensive collection of peer-reviewed publications, manuscripts in preparation, and invited presentations organized by research theme. My work spans network science, population genomics, machine learning applications to biology, and conservation biology.
+            </p>
+        </section>
+
+        <!-- Gene Co-expression Networks Section -->
+        <section>
+            <h2 style="font-family: 'Fraunces', serif; font-size: 2.2rem; margin-bottom: 2.5rem; color: var(--light-text); position: relative; padding-bottom: 1rem;">
+                Gene Co-expression Network Dynamics
+                <span style="position: absolute; bottom: 0; left: 0; width: 60px; height: 3px; background: linear-gradient(90deg, var(--accent), transparent); border-radius: 2px;"></span>
+            </h2>
+            <p style="color: var(--muted-text); font-size: 1rem; line-height: 1.8; margin-bottom: 2rem; max-width: 800px;">
+                Understanding how gene regulatory networks reorganize across populations and time periods, examining the interplay between evolutionary adaptation, hybridization, and gene flow in natural populations.
+            </p>
+
+            <div class="publications-list">
+                
+                <div class="pub-item" data-type="peer-reviewed">
+                    <div class="pub-year">2025</div>
+                    <span class="pub-type">Journal Article</span>
+                    <h3>Effects of hybridization and gene flow in gene co-expression networks</h3>
+                    <p class="pub-authors">Runghen R, Bolnick DI</p>
+                    <p class="pub-journal">Genetics, 230(2), iyaf057</p>
+                    <p class="pub-description">Quantitative analysis of how hybridization and gene flow alter gene co-expression network architecture in threespine stickleback populations. Investigating whether regulatory networks reorganize during reproductive isolation and adaptive divergence.</p>
+                    <div class="pub-links">
+                        <a href="https://doi.org/10.1093/genetics/iyaf057" class="pub-link" target="_blank">DOI: 10.1093/genetics/iyaf057</a>
+                    </div>
+                </div>
+
+                <div class="pub-item" data-type="in-prep">
+                    <div class="pub-year">In Preparation</div>
+                    <span class="pub-type">Journal Article</span>
+                    <h3>Confounding effects of inferring gene co-expression networks from pooled data from different biological populations</h3>
+                    <p class="pub-authors">Runghen R, Bolnick DI</p>
+                    <div class="pub-status">Manuscript in preparation for submission to major journal</div>
+                    <p class="pub-description">Examining methodological considerations and potential biases in inferring co-expression networks from pooled samples representing distinct biological populations, with implications for population genomics studies.</p>
+                </div>
+
+                <div class="pub-item" data-type="peer-reviewed">
+                    <div class="pub-year">2024</div>
+                    <span class="pub-type">Invited Talk</span>
+                    <h3>Understanding and predicting interactions in biological networks: from forecasting species interactions to characterizing gene co-expression networks</h3>
+                    <p class="pub-journal">UML Fall Colloqium, University of Massachusetts Lowell, November 2024</p>
+                </div>
+
+                <div class="pub-item" data-type="peer-reviewed">
+                    <div class="pub-year">2024</div>
+                    <span class="pub-type">Seminar</span>
+                    <h3>A network approach to understand and predict interactions: from tracking biological invasion to forecasting species interactions</h3>
+                    <p class="pub-journal">EEB Seminar, University of Connecticut, September 2024</p>
+                </div>
+
+                <div class="pub-item" data-type="peer-reviewed">
+                    <div class="pub-year">2024</div>
+                    <span class="pub-type">Poster Presentation</span>
+                    <h3>Effects of hybridization on gene co-expression networks</h3>
+                    <p class="pub-journal">3rd Joint Congress on Evolutionary Biology, Montreal, Canada, July 2024</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Human-Mediated Dispersal & Species Interactions Section -->
+        <section style="margin-top: 5rem;">
+            <h2 style="font-family: 'Fraunces', serif; font-size: 2.2rem; margin-bottom: 2.5rem; color: var(--light-text); position: relative; padding-bottom: 1rem;">
+                Human-Mediated Dispersal & Predictive Interaction Networks
+                <span style="position: absolute; bottom: 0; left: 0; width: 60px; height: 3px; background: linear-gradient(90deg, var(--accent), transparent); border-radius: 2px;"></span>
+            </h2>
+            <p style="color: var(--muted-text); font-size: 1rem; line-height: 1.8; margin-bottom: 2rem; max-width: 800px;">
+                Using network science and machine learning to understand and predict human-mediated species dispersal, with applications to biosecurity and conservation. Integrating graph embeddings, visitation networks, and node metadata to identify risk pathways and forecast species interactions.
+            </p>
+
+            <div class="publications-list">
+                
+                <div class="pub-item" data-type="peer-reviewed">
+                    <div class="pub-year">2023</div>
+                    <span class="pub-type">Journal Article</span>
+                    <h3>Using network analysis to study and manage human-mediated dispersal of exotic species</h3>
+                    <p class="pub-authors">Runghen R, Llopis-Belenguer C, McNeill MR, Dalla Riva GV, Stouffer DB</p>
+                    <p class="pub-journal">Biological Invasions, 1–21</p>
+                    <p class="pub-description">Comprehensive network science framework for modeling and predicting exotic species introduction via human activity. Integrating visitation network data, dispersal mechanisms, and ecological factors to assess invasion risk across protected areas and provide quantitative tools for conservation managers.</p>
+                </div>
+
+                <div class="pub-item" data-type="peer-reviewed">
+                    <div class="pub-year">2022</div>
+                    <span class="pub-type">Journal Article</span>
+                    <h3>Exploiting node metadata to predict new interactions in bipartite networks using graph embedding and neural networks</h3>
+                    <p class="pub-authors">Runghen R, Stouffer DB, Dalla Riva GV</p>
+                    <p class="pub-journal">Royal Society Open Science, 9(8), 220079</p>
+                    <p class="pub-description">Machine learning approach to predict novel species interactions in bipartite networks by leveraging node metadata and graph embeddings. Developed neural network methods that exploit node features to identify high-risk host-parasite and species interaction pairs with improved prediction accuracy for previously unseen interactions.</p>
+                    <div class="pub-links">
+                        <a href="https://doi.org/10.1098/rsos.220079" class="pub-link" target="_blank">DOI: 10.1098/rsos.220079</a>
+                    </div>
+                </div>
+
+                <div class="pub-item" data-type="peer-reviewed">
+                    <div class="pub-year">2021</div>
+                    <span class="pub-type">Journal Article</span>
+                    <h3>Assessing unintended human-mediated dispersal using visitation networks</h3>
+                    <p class="pub-authors">Runghen R, Bramon Mora B, Godoy-Lorite A, Stouffer DB</p>
+                    <p class="pub-journal">Journal of Applied Ecology, 58(4), 777–788</p>
+                    <p class="pub-description">Network-based approach to quantify human-driven exotic species dispersal risk. Analyzed visitation patterns across natural areas to model pathways of unintended species introduction and developed metrics combining network topology with spatial information to identify high-risk dispersal routes.</p>
+                    <div class="pub-links">
+                        <a href="https://doi.org/10.1111/1365-2664.13804" class="pub-link" target="_blank">DOI: 10.1111/1365-2664.13804</a>
+                    </div>
+                </div>
+
+                <div class="pub-item" data-type="peer-reviewed">
+                    <div class="pub-year">2024</div>
+                    <span class="pub-type">Invited Talk</span>
+                    <h3>A network approach to understand and predict interactions: from tracking exotic species introduction to characterising gene co-expression networks</h3>
+                    <p class="pub-journal">School of Biological Sciences, Ecology and Evolution Group Meeting, University of Bristol, UK, April 2024</p>
+                </div>
+
+                <div class="pub-item" data-type="peer-reviewed">
+                    <div class="pub-year">2024</div>
+                    <span class="pub-type">Invited Talk</span>
+                    <h3>A network approach to understand and predict interactions: from tracking biological invasion to forecasting species interactions</h3>
+                    <p class="pub-journal">Lecture series in Aquatic Ecology and Evolution, EAWAG, ETH/University of Bern, Lucerne, Switzerland, March 2024</p>
+                </div>
+
+                <div class="pub-item" data-type="peer-reviewed">
+                    <div class="pub-year">2020</div>
+                    <span class="pub-type">Conference Presentation</span>
+                    <h3>Predicting human–mediated dispersal using visitation networks and traits</h3>
+                    <p class="pub-journal">Virtual NetSci 2020, Rome, Italy, September 2020</p>
+                </div>
+
+                <div class="pub-item" data-type="peer-reviewed">
+                    <div class="pub-year">2019</div>
+                    <span class="pub-type">Conference Presentation</span>
+                    <h3>Risk of unintended human-mediated dispersal using visitors travelling patterns</h3>
+                    <p class="pub-journal">New Zealand Ecological Society Conference, Lincoln, New Zealand, December 2019</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Network Methods & Applications Section -->
+        <section style="margin-top: 5rem;">
+            <h2 style="font-family: 'Fraunces', serif; font-size: 2.2rem; margin-bottom: 2.5rem; color: var(--light-text); position: relative; padding-bottom: 1rem;">
+                Network Science Methods & Collaborative Studies
+                <span style="position: absolute; bottom: 0; left: 0; width: 60px; height: 3px; background: linear-gradient(90deg, var(--accent), transparent); border-radius: 2px;"></span>
+            </h2>
+            <p style="color: var(--muted-text); font-size: 1rem; line-height: 1.8; margin-bottom: 2rem; max-width: 800px;">
+                Methodological work and collaborative studies applying network science and machine learning to biological problems, including food web reconstruction, graph-based learning approaches, and host-parasite network analysis.
+            </p>
+
+            <div class="publications-list">
+                
+                <div class="pub-item" data-type="peer-reviewed">
+                    <div class="pub-year">2023</div>
+                    <span class="pub-type">Journal Article</span>
+                    <h3>Graph embedding and transfer learning can help predict potential species interaction networks despite data limitations</h3>
+                    <p class="pub-authors">Strydom T, Bouskila S, Banville F, Barros C, Caron D, Farrel MJ, Fortin M, Mercier B, Pollock LJ, Runghen R, Dalla Riva GV, Poisot T</p>
+                    <p class="pub-journal">Methods in Ecology and Evolution, 14, 2917-2930</p>
+                    <p class="pub-description">Demonstrating how transfer learning and graph embeddings can overcome data limitations in predicting species interaction networks. Shows that pre-trained models effectively generalize across different ecological systems and networks.</p>
+                    <div class="pub-links">
+                        <a href="https://doi.org/10.1111/2041-210X.14088" class="pub-link" target="_blank">DOI: 10.1111/2041-210X.14088</a>
+                    </div>
+                </div>
+
+                <div class="pub-item" data-type="peer-reviewed">
+                    <div class="pub-year">2022</div>
+                    <span class="pub-type">Journal Article</span>
+                    <h3>Food web reconstruction through phylogenetic transfer of low-rank network representation</h3>
+                    <p class="pub-authors">Strydom T, Bouskila S, Banville F, Barros C, Caron D, Farrel MJ, Fortin M, Mercier B, Pollock LJ, Runghen R, Dalla Riva GV, Poisot T</p>
+                    <p class="pub-journal">Methods in Ecology and Evolution</p>
+                    <p class="pub-description">Novel approach for reconstructing food webs by leveraging phylogenetic information and graph-based low-rank representations. Demonstrates improved predictive accuracy for ecological networks.</p>
+                </div>
+
+                <div class="pub-item" data-type="peer-reviewed">
+                    <div class="pub-year">2021</div>
+                    <span class="pub-type">Journal Article</span>
+                    <h3>Network analysis: ten years shining light on host–parasite associations</h3>
+                    <p class="pub-authors">Runghen R, Poulin R, Monlleo-Borrull C, Llopis-Belenguer C</p>
+                    <p class="pub-journal">Trends in Parasitology, 37(5), 445–455</p>
+                    <p class="pub-description">Comprehensive review of network approaches applied to parasitology over the past decade. Synthesizes methodologies including network visualization, community detection, motif analysis, and predictive modeling. Highlights how network science has revolutionized understanding of host-parasite interactions.</p>
+                </div>
+
+                <div class="pub-item" data-type="peer-reviewed">
+                    <div class="pub-year">2019</div>
+                    <span class="pub-type">Journal Article</span>
+                    <h3>An early career perspective on encouraging collaborative and interdisciplinary research in ecology</h3>
+                    <p class="pub-authors">Pannell JL, Dencer-Brown AM, Greening SS, Hume EA, Jarvis RM, Mathieu C, Mugford J, Runghen R</p>
+                    <p class="pub-journal">Ecosphere, 10(10):e02899</p>
+                </div>
+
+                <div class="pub-item" data-type="peer-reviewed">
+                    <div class="pub-year">2021</div>
+                    <span class="pub-type">Department Seminar</span>
+                    <h3>Using model-based approaches to understand and predict interactions in large scale networks</h3>
+                    <p class="pub-journal">Department Seminar, School of Mathematics and Statistics, University of Canterbury, April 2021</p>
+                </div>
+
+                <div class="pub-item" data-type="peer-reviewed">
+                    <div class="pub-year">2021</div>
+                    <span class="pub-type">Colloquium</span>
+                    <h3>A network approach to understand and predict patterns of interactions in complex systems</h3>
+                    <p class="pub-journal">Mathematics and Statistics Postgraduate Colloquium, School of Mathematics and Statistics, University of Canterbury, February 2021</p>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <h2 style="font-family: 'Fraunces', serif; margin-bottom: 1.5rem; font-size: 1.8rem;">Let's Connect</h2>
+            <div class="social-links">
+                <a href="https://github.com/rogini98" class="social-link" target="_blank">GitHub</a>
+                <a href="https://www.linkedin.com" class="social-link" target="_blank">LinkedIn</a>
+                <a href="mailto:rogini.runghen@gmail.com" class="social-link">Email</a>
+                <a href="https://scholar.google.com" class="social-link" target="_blank">Google Scholar</a>
+            </div>
+            <p class="footer-text">© 2025 Rogini Runghen. Exploring biological networks, one dataset at a time.</p>
+        </div>
+    </footer>
+
+
+</body>
+</html>
